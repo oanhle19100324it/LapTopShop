@@ -48,7 +48,11 @@
               <td><%= user.name %></td>
               <td><%= user.email %></td>
               <td><%= user.address %></td>
-              <td><button class="btn btn-danger">Delete</button></td>
+              <form action="/handle-delete-user/<%= user.id %>" method="POST">
+                 <td><button type="submit" 
+                  class="btn btn-danger">Delete <%= user.id %></button></td>
+            
+              </form>
             </tr>
             <% }); %>
           </ul>

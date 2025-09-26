@@ -29,4 +29,18 @@ const getAllUsers = async () => {
   }
 };
 
-export { handleCreateUser, getAllUsers };
+const handleDeleteUser = async (id: string) => {
+  const connection = await getConnection();
+  try {
+    const sql = "DELETE FROM `users` WHERE `id` = ? LIMIT 1";
+
+    const [result, fields] = await connection.query(sql, [id]);
+
+    console.log(result);
+    console.log(fields);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export { handleCreateUser, getAllUsers, handleDeleteUser };
