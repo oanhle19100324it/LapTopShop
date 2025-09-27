@@ -43,4 +43,18 @@ const handleDeleteUser = async (id: string) => {
   }
 };
 
-export { handleCreateUser, getAllUsers, handleDeleteUser };
+const getUserById = async (id: string) => {
+  const connection = await getConnection();
+  try {
+    const sql = "SELECT * FROM `users` WHERE `id` = ? LIMIT 1";
+    const [rows] = await connection.execute(sql, [id]);
+
+    // Trả về user đầu tiên
+    return Array.isArray(rows) ? rows[0] : null;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
+
+export { handleCreateUser, getAllUsers, handleDeleteUser, getUserById };

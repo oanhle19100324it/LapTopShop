@@ -5,6 +5,7 @@ import {
   getCreateUserPage,
   postCreateUserPage,
   postDeleteUserPage,
+  getViewUserPage,
 } from "../controllers/user.controller";
 
 const WebRoutes = (app: Express) => {
@@ -12,6 +13,7 @@ const WebRoutes = (app: Express) => {
   router.get("/create-user", getCreateUserPage);
   router.post("/handle-create-user", postCreateUserPage);
   router.post("/handle-delete-user/:id", postDeleteUserPage);
+  router.get("/handle-view-user/:id", getViewUserPage);
 
   // tiền tố đầu tiên trong đường link
   app.use("/", router);

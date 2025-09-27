@@ -3,6 +3,7 @@ import {
   handleCreateUser,
   getAllUsers,
   handleDeleteUser,
+  getUserById,
 } from "../services/user.services";
 
 const getHomePage = async (req: Request, res: Response) => {
@@ -30,9 +31,31 @@ const postDeleteUserPage = async (req: Request, res: Response) => {
   return res.redirect("/");
 };
 
+const getViewUserPage = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    console.log("ID received:", id); // Debug
+
+    // Lấy user từ database
+    const user = await getUserById(id);
+    console.log("User data:", user); // Debug
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // ✅ TRUYỀN DỮ LIỆU USER VÀO VIEW
+    res.render("view-user.ejs", { user: user });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error");
+  }
+};
+
 export {
   getHomePage,
   getCreateUserPage,
   postCreateUserPage,
   postDeleteUserPage,
+  getViewUserPage,
 };
