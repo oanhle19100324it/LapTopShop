@@ -4,6 +4,7 @@ import {
   getAllUsers,
   handleDeleteUser,
   getUserById,
+  postUpdateUserById,
 } from "../services/user.services";
 
 const getHomePage = async (req: Request, res: Response) => {
@@ -34,21 +35,35 @@ const postDeleteUserPage = async (req: Request, res: Response) => {
 const getViewUserPage = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    console.log("ID received:", id); // Debug
+    console.log("ID received:", id);
 
     // Lấy user từ database
     const user = await getUserById(id);
-    console.log("User data:", user); // Debug
+    console.log("User data:", user);
 
     if (!user) {
       return res.status(404).send("User not found");
     }
 
-    // ✅ TRUYỀN DỮ LIỆU USER VÀO VIEW
     res.render("view-user.ejs", { user: user });
   } catch (err) {
     console.log(err);
     res.status(500).send("Server error");
+  }
+};
+
+const postUpdateUserPage = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name, email, address } = req.body; // Lấy dữ liệu từ form
+
+    console.log("Update data:", { id, name, email, address }); // Debug
+
+    await postUpdateUserById(id, name, email, address);
+    return res.redirect("/"); // Chuyển hướng về trang chủ
+  } catch (err) {
+    console.log(err);
+    return res.redirect("/");
   }
 };
 
@@ -58,4 +73,5 @@ export {
   postCreateUserPage,
   postDeleteUserPage,
   getViewUserPage,
+  postUpdateUserPage,
 };

@@ -18,22 +18,36 @@
   <body>
     <div style="width: 600px; margin: auto; padding: 10px 0px">
       <h1>View a user</h1>
-      <form action="/handle-update-user" method="POST">
-      <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input
-        value="<%= user.name %>" name="name" type="text" class="form-control" placeholder="your name" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input value="<%= user.email %>" name="email" type="text" class="form-control" placeholder="@gmail.com" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Address</label>
-        <textarea name="address" class="form-control" rows="5"><%= user.address %></textarea>
-      </div>
-      <button class="btn btn-primary" type="submit">save!</button>
+      <!-- Sửa action form để bao gồm ID -->
+      <form action="/handle-update-user/<%= user.id %>" method="POST">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input
+            value="<%= user.name %>"
+            name="name"
+            type="text"
+            class="form-control"
+            placeholder="your name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input
+            value="<%= user.email %>"
+            name="email"
+            type="text"
+            class="form-control"
+            placeholder="@gmail.com"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <textarea name="address" class="form-control" rows="5">
+<%= user.address %></textarea
+          >
+        </div>
+        <button class="btn btn-primary" type="submit">Update!</button>
+      </form>
     </div>
-    </form>
   </body>
 </html>
