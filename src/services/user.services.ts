@@ -35,17 +35,10 @@ const handleDeleteUser = async (id: string) => {
 };
 
 const getUserById = async (id: string) => {
-  const connection = await getConnection();
-  try {
-    const sql = "SELECT * FROM `user` WHERE `id` = ? LIMIT 1";
-    const [rows] = await connection.execute(sql, [id]);
-
-    // Trả về user đầu tiên
-    return Array.isArray(rows) ? rows[0] : null;
-  } catch (err) {
-    console.log(err);
-    return null;
-  }
+  const getUser = await prisma.user.findUnique({
+    where: { id: +id }, //convert string sang int
+  });
+  return getUser;
 };
 
 const postUpdateUserById = async (
@@ -54,22 +47,14 @@ const postUpdateUserById = async (
   email: string,
   address: string
 ) => {
-  const connection = await getConnection();
-  try {
-    const sql =
-      "UPDATE `user` SET `name` = ?, `email` = ?, `address` = ? WHERE `id` = ?";
-    const [result, fields] = await connection.query(sql, [
-      name,
-      email,
-      address,
-      id,
-    ]);
-
-    console.log(result);
-    console.log(fields);
-  } catch (err) {
-    console.log(err);
-  }
+  const updatedUser = await prisma.user.update({
+    where: { id: +id }, //convert string sang int
+    data: {
+      name: name,
+      email: email,
+      address: address,
+    },
+  });
 };
 
 export {
