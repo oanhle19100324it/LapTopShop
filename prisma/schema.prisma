@@ -39,7 +39,7 @@ model order{
   totalPrice Int
 }
 
-model product{Ơ
+model product{
 @@map("products")
   id Int @id @default(autoincrement())
 name String @db.VarChar(255)

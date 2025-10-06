@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import WebRoutes from "./routes/web";
 import getConnection from "./config/database";
-
+import { initDatabase } from "./config/seed";
 dotenv.config();
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 WebRoutes(app);
 getConnection();
+initDatabase();
 
 app.listen(port, () => {
   console.log(`✅ Server is running at http://localhost:${port}`);

@@ -5,6 +5,7 @@ import {
   handleDeleteUser,
   getUserById,
   postUpdateUserById,
+  getAllRoles,
 } from "../services/user.services";
 
 const getHomePage = async (req: Request, res: Response) => {
@@ -15,15 +16,19 @@ const getHomePage = async (req: Request, res: Response) => {
   });
 };
 
-const getCreateUserPage = (req: Request, res: Response) => {
-  res.render("create-user.ejs");
+const getCreateUserPage = async (req: Request, res: Response) => {
+  const roles = await getAllRoles();
+  res.render("admin/users/create.ejs", {
+    roles: roles,
+  });
 };
 
 //quay mặc định về trang home
 const postCreateUserPage = (req: Request, res: Response) => {
-  const { fullName, email, address } = req.body;
-  handleCreateUser(fullName, email, address);
-  return res.redirect("/");
+  const { username, fullName, phone, address, password, accountType } =
+    req.body;
+  handleCreateUser(accountType, username, fullName, phone, address, password);
+  return res.render("admin/users/create.ejs");
 };
 
 const postDeleteUserPage = async (req: Request, res: Response) => {
