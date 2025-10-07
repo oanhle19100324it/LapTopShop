@@ -14,6 +14,7 @@ import {
   getManageOrderPage,
   getManageProductPage,
 } from "../controllers/dashboard.controller";
+import fileUploadMiddleware from "src/middleware/multer";
 
 const WebRoutes = (app: Express) => {
   router.get("/", getHomePage);
@@ -30,6 +31,11 @@ const WebRoutes = (app: Express) => {
 
   router.get("/admin/product", getManageProductPage);
   router.get("/admin/order", getManageOrderPage);
+  router.post(
+    "/admin/handle-create-user",
+    fileUploadMiddleware("avatar"),
+    postCreateUserPage
+  );
 
   // tiền tố đầu tiên trong đường link
   app.use("/", router);

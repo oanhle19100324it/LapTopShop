@@ -42,7 +42,7 @@ $("#avatarPreview").css({ "display": "block" });
         <main>
 <div style="width: 600px; margin: auto; padding: 10px 0px">
       <h1>Create a user</h1>
-      <form action="/handle-create-user" method="POST">
+<form action="/admin/handle-create-user" method="POST" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label">FullName</label>
         <input name="fullName" type="text" class="form-control" placeholder="your name" />
@@ -51,15 +51,19 @@ $("#avatarPreview").css({ "display": "block" });
         <label class="form-label">UserName</label>
         <input name="userName" type="text" class="form-control"  />
       </div>
+       <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" required />
+              </div>
       <div class="mb-3">
         <label class="form-label">Phone</label>
         <input name="phone" type="text" class="form-control"  />
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">Avatar</label>
-       <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg">
+       <input class="form-control" type="file" name="avatar" id="avatarFile" accept=".png, .jpg, .jpeg">
     </div>
-    <img style="max-height: 250px; display: none;" alt="avatar preview"
+    <img style="max-height: 250px; display: none;" alt="avatar preview" 
 id="avatarPreview" />
     <div class="row">
       <div class="col-md-6">
@@ -68,7 +72,7 @@ id="avatarPreview" />
 </div>
 <div class="col-md-4">
 <label for="inputState" class="form-label">State</label>
-<select id="inputState" class="form-select">
+<select name="accountType" id="inputState" class="form-select">
 <option selected>Choose...</option>
 <% roles.forEach((role,index) => { %>
   <option value="<%-role.id %>" <%= role.id === index ? 'selected' : '' %>>
@@ -82,7 +86,7 @@ id="avatarPreview" />
         <label class="form-label">Address</label>
         <textarea name="address" class="form-control" rows="5"></textarea>
       </div>
-      <button class="btn btn-primary" type="submit">save!</button>
+      <button  class="btn btn-primary" type="submit">save!</button>
     </div>
 
           

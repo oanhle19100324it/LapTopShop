@@ -24,11 +24,23 @@ const getCreateUserPage = async (req: Request, res: Response) => {
 };
 
 //quay mặc định về trang home
-const postCreateUserPage = (req: Request, res: Response) => {
-  const { username, fullName, phone, address, password, accountType } =
+const postCreateUserPage = async (req: Request, res: Response) => {
+  const roles = await getAllRoles();
+
+  const { userName, fullName, phone, address, password, accountType } =
     req.body;
-  handleCreateUser(accountType, username, fullName, phone, address, password);
-  return res.render("admin/users/create.ejs");
+  const file = req.file;
+  const avatar = file ? file.filename : null;
+  handleCreateUser(
+    accountType,
+    userName,
+    fullName,
+    phone,
+    address,
+    password,
+    avatar
+  );
+  return res.redirect("/admin/user");
 };
 
 const postDeleteUserPage = async (req: Request, res: Response) => {
