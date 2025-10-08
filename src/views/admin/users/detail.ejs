@@ -14,7 +14,7 @@
       href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
       rel="stylesheet"
     />
-    <link href="css/styles.css" rel="stylesheet" />
+<link href="/admin/css/styles.css" rel="stylesheet" />
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
       crossorigin="anonymous"
@@ -41,23 +41,20 @@ $("#avatarPreview").css({ "display": "block" });
       <div id="layoutSidenav_content">
         <main>
 <div style="width: 600px; margin: auto; padding: 10px 0px">
-      <h1>Create a user</h1>
+      <h1>detail a user</h1>
 <form action="/admin/handle-create-user" method="POST" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label">FullName</label>
-        <input name="fullName" type="text" class="form-control" placeholder="your name" />
+        <input value="<%= user.fullName %>" name="fullName" type="text" class="form-control" placeholder="your name" />
       </div>
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input name="email" type="text" class="form-control"  />
+        <input value="<%= user.email %>" name="email" type="text" class="form-control"  />
       </div>
-       <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" required />
-              </div>
+      
       <div class="mb-3">
         <label class="form-label">Phone</label>
-        <input name="phone" type="text" class="form-control"  />
+        <input value="<%= user.phone %>" name="phone" type="text" class="form-control"  />
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">Avatar</label>
@@ -70,16 +67,16 @@ id="avatarPreview" />
 <label for="inputCity" class="form-label">City</label>
 <input type="text" class="form-control" id="inputCity">
 </div>
-<div class="col-md-6">
-  <label for="roleId" class="form-label">Role</label>
-  <select name="roleId" id="roleId" class="form-select" required>
-    <option value="">Choose role...</option>
-    <% roles.forEach((role) => { %>
-      <option value="<%= role.id %>">
-        <%= role.name %>
-      </option>
-    <% }) %>
-  </select>
+<div class="col-md-4">
+<label for="inputState" class="form-label">State</label>
+<select name="accountType" id="inputState" class="form-select">
+<option selected>Choose...</option>
+<% roles.forEach((role,index) => { %>
+  <option value="<%-role.id %>" <%= role.id === user.roleId ? 'selected' : '' %>>
+    <%- role.name %>
+  </option>
+<%})%>
+</select>
 </div>
     </div>
       <div class="mb-3">

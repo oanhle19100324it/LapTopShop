@@ -68,11 +68,13 @@
               <td><%= user.address %></td>
                  <td>
                   <div style="display: flex; gap: 10px;">
-                      <form action="/handle-delete-user/<%= user.id %>" method="POST">
+                      <form action="/admin/handle-delete-user/<%= user.id %>" method="POST">
                       <button type="submit" class="btn btn-danger">Delete <%= user.id %></button>
                       </form>
-                      <form action="/getViewUserPage/<%= user.id %>" method="GET">
-                          <a href="/handle-view-user/<%= user.id %>" class="btn btn-warning">View</a>
+                      <form action="/admin/view-user/<%= user.id %>" method="GET">
+                         <button type="submit" class="btn btn-warning">View <%= user.id %></button>
+
+                          <!-- <a href="/admin/handle-view-user/<%= user.id %>" class="btn btn-warning">View</a> -->
                       </form>
                   </div>
                 </td>

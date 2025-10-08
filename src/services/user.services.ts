@@ -9,23 +9,29 @@ const hashPassword = async (planText: string) => {
 };
 const handleCreateUser = async (
   accountType: string,
-  username: string,
+  email: string,
   fullName: string,
   phone: string,
   address: string,
   password: string,
-  avatar: string | null
+  avatar: string | null,
+  roleId: string
 ) => {
+  const roleIdNumber = parseInt(roleId);
+  if (isNaN(roleIdNumber)) {
+    throw new Error(`Invalid roleId: ${roleId}`);
+  }
   const defaultPassword = await hashPassword("123456");
   await prisma.user.create({
     data: {
       accountType: ACCOUNT_TYPE.SYSTEM,
-      username: username,
+      email: email,
       password: defaultPassword,
       fullName: fullName,
       phone: phone,
       address: address,
       avatar: avatar,
+      roleId: +roleId,
     },
   });
 };
