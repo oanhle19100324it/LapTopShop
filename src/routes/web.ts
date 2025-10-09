@@ -14,6 +14,8 @@ import {
   getManageOrderPage,
   getManageProductPage,
 } from "../controllers/dashboard.controller";
+
+import { getProductPage } from "../controllers/client/product.controller";
 import fileUploadMiddleware from "src/middleware/multer";
 
 const WebRoutes = (app: Express) => {
@@ -36,6 +38,8 @@ const WebRoutes = (app: Express) => {
     fileUploadMiddleware("avatar"),
     postCreateUserPage
   );
+
+  router.get("/produc/:id", getProductPage);
 
   // tiền tố đầu tiên trong đường link
   app.use("/", router);
