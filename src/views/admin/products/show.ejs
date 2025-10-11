@@ -30,43 +30,40 @@
           <div class="container-fluid px-4">
             <h1 class="mt-4">Manage Products</h1>
             <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+              <li class="breadcrumb-item">
+                <a href="/admin/create-product">Dashboard</a>
+              </li>
               <li class="breadcrumb-item active">Product</li>
             </ol>
-            <div>      <table class="table table-hover table-bordered">
-        <thead>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Action</th>
-        </thead>
-        <tbody>
-
-            <% users.forEach(function(user){ %>
-
-            <tr>
-              <td><%= user.id %></td>
-              <td><%= user.fullName %></td>
-              <td><%= user.email %></td>
-              <td><%= user.address %></td>
-                 <td>
-                  <div style="display: flex; gap: 10px;">
-                      <form action="/handle-delete-user/<%= user.id %>" method="POST">
-                      <button type="submit" class="btn btn-danger">Delete <%= user.id %></button>
-                      </form>
-                      <form action="/getViewUserPage/<%= user.id %>" method="GET">
-                          <a href="/admin/handle-view-user/<%= user.id %>" class="btn btn-warning">View</a>
-                      </form>
-                  </div>
-                </td>
-            
-              </form>
-            </tr>
-            <% }); %>
-          </ul>
-        </tbody>
-      </table></div>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 25px;
+              "
+            >
+              <div>
+                <h1>List Product</h1>
+              </div>
+              <div>
+                <a href="/admin/create-product" class="btn btn-primary"
+                  >Create Product</a
+                >
+              </div>
+            </div>
+            <div>
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Factory</th>
+                  <th>Action</th>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
           </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
