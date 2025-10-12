@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
+import { handleCreateProduct } from "services/Admin/product.services";
 
 const getAdminCreateProductPage = async (req: Request, res: Response) => {
   const errors: string[] = [];
@@ -20,7 +21,7 @@ const getAdminCreateProductPage = async (req: Request, res: Response) => {
 };
 
 const postAdminCreateProductPage = async (req: Request, res: Response) => {
-  const { name, price, detailDesc, shortDesc, factory, target } =
+  const { name, price, detailDesc, shortDesc, factory, target, quantity } =
     req.body as TProductSchema;
 
   const validate = ProductSchema.safeParse(req.body);
@@ -35,6 +36,20 @@ const postAdminCreateProductPage = async (req: Request, res: Response) => {
       oldInput,
     });
   }
+
+  const image = req.file ? req.file.filename : null;
+
+  // Gọi hàm tạo product đúng kiểu
+  await handleCreateProduct(
+    name,
+    Number(price),
+    detailDesc,
+    shortDesc,
+    Number(quantity),
+    factory,
+    target,
+    image
+  );
 
   res.redirect("/admin/product");
 };

@@ -7,14 +7,13 @@ import {
   postDeleteUserPage,
   getViewUserPage,
   postUpdateUserPage,
-} from "../controllers/user.controller";
+} from "../controllers/admin/user.controller";
 import {
   getDashboardPage,
   getManageUserPage,
   getManageOrderPage,
-  getManageProductPage,
-} from "../controllers/dashboard.controller";
-
+} from "../controllers/admin/dashboard.user.controller";
+import { getManageProductPage } from "../controllers/admin/dashboard.product.controller";
 import { getProductPage } from "../controllers/client/product.controller";
 import {
   getAdminCreateProductPage,

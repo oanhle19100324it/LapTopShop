@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ACCOUNT_TYPE } from "../config/constant";
+import { ACCOUNT_TYPE } from "config/constant";
 import {
   handleCreateUser,
   getAllUsers,
@@ -7,7 +7,7 @@ import {
   getUserById,
   postUpdateUserById,
   getAllRoles,
-} from "../services/user.services";
+} from "services/Admin/user.services";
 
 const getHomePage = async (req: Request, res: Response) => {
   res.render("client/home/show.ejs");

@@ -61,7 +61,31 @@
                   <th>Factory</th>
                   <th>Action</th>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+            <% products.forEach(function(product){ %>
+
+            <tr>
+              <td><%= product.id %></td>
+              <td><%= product.name %></td>
+              <td><%= product.price %></td>
+              <td><%= product.factory %></td>
+
+                 <td>
+                  <div style="display: flex; gap: 10px;">
+                    <form action="" method="POST">
+                      <button type="submit" class="btn btn-danger">Delete <%= product.id %></button>
+                    </form>
+                    <form action="" method="GET">
+                       <button type="submit" class="btn btn-warning">View <%= product.id %></button>
+
+                      
+                  </div>
+                </td>
+              
+              </form>
+            </tr>
+            <% }); %>
+          </ul></tbody>
               </table>
             </div>
           </div>

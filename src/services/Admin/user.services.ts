@@ -1,5 +1,5 @@
 import { prisma } from "config/client";
-import getConnection from "../config/database";
+import getConnection from "../../config/database";
 import { ACCOUNT_TYPE } from "config/constant";
 import bcrypt from "bcrypt";
 const saltRounds = 10;
