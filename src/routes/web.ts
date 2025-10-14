@@ -47,7 +47,7 @@ const WebRoutes = (app: Express) => {
     postAdminCreateProductPage
   );
 
-  router.get("/produc/:id", getProductPage);
+  router.get("/product/:id", getProductPage);
 
   // tiền tố đầu tiên trong đường link
   app.use("/", router);

@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { ACCOUNT_TYPE } from "config/constant";
+import { prisma } from "config/client";
+
 import {
   handleCreateUser,
   getAllUsers,
@@ -10,7 +12,10 @@ import {
 } from "services/Admin/user.services";
 
 const getHomePage = async (req: Request, res: Response) => {
-  res.render("client/home/show.ejs");
+  const products = await prisma.product.findMany();
+  res.render("client/home/show.ejs", {
+    products,
+  });
 };
 
 const getCreateUserPage = async (req: Request, res: Response) => {
